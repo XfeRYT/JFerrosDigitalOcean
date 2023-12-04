@@ -1,0 +1,186 @@
+{% load static %}
+{% load django_bootstrap5 %}
+{% load bootstrap_icons %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'img/logo.png' %}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link href="{% static '/node_modules/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+      <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static '/node_modules/fontawesome-free/css/all.min.css' %}">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{% static '/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static '/node_modules/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static '/node_modules/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %}">
+    <!-- libreria sweetalert2 -->
+    <link rel="stylesheet" href="{% static '/node_modules/sweetalert2/dist/sweetalert2.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-icons/bootstrap-icons.css' %}">
+    <script type="text/javascript" src="{% static '/node_modules/accessibility/dist/main.bundle.js' %}"></script>
+    <title> JFerros - {{ titulo }} </title>
+</head>
+
+<body class="hold-transition  sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" style="overflow-x: hidden;">
+  
+  <div class="wrapper ">
+    {% include 'partials/header.html' %}
+    <div class="content-wrapper" >
+        <div class="col-sm-6  d-flex justify-content-start w-100 barra-inicio" style="background-color: white;">
+            <nav class="navbar barra-inicio" style="background-color: white">
+                <div class="container-fluid ">
+                  <button class="navbar-toggler color-iconos" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation" style="color: #68411d;">
+                    <span class="navbar-toggler-icon" style="color: #68411d;"></span>
+                  </button>
+                  <div class="offcanvas offcanvas-start contenedor-menu-botones w-auto" style="color: #fcf9f5; max-width: 400px; min-width: 250px;" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                    <div class="offcanvas-header">
+                      <img src="/static/img/logo.png" width="50%" alt="">
+                      <button type="button" class="btn-close btn-close-black color-iconos m-1" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body ">
+                      <ul class="navbar-nav  justify-content-end flex-grow-1 pe-3">
+                        {% if request.user.groups.first.name == "Administrador" or request.user.groups.first.name == "Proveedor" %}                   
+                        <li class="nav-item dropdown my-2 ">
+                          <a class="nav-link dropdown-toggle letras-texto"  role="button"  aria-expanded="false" style="color: black;">
+                            Compras
+                          </a>
+                          <ul class="dropdown-menu position-absolute b-0 color-fondo-texto" style="background-color: #fcf9f5; border-radius:15%;">
+                            {% if request.user.groups.first.name == "Administrador" or request.user.groups.first.name == "Proveedor" %}
+                            <li><a class="dropdown-item fw-bolder letras-texto " style="border-radius: 12px;" href="{% url 'compra' %}">Compra</a></li>
+                            {% endif %}
+                            {% if request.user.groups.first.name == "Administrador" %}
+                            <li><a class="dropdown-item fw-bolder letras-texto" style="border-radius: 12px;"href="{% url 'cuenta_pendiente' %}">Cuenta pendiente</a></li>
+                            {% endif %}
+                          </ul>
+                        </li>
+                        {% endif %}
+
+                        {% if request.user.groups.first.name == "Administrador" or request.user.groups.first.name == "Proveedor" %}
+                        <li class="nav-item dropdown my-2">
+                          <a class="nav-link dropdown-toggle letras-texto" href="#" role="button"  aria-expanded="false" style="color: black;">
+                            Ingreso - Egreso
+                          </a>
+                          <ul class="dropdown-menu position-absolute b-0 color-fondo-texto" style="background-color: #fcf9f5; border-radius:15%;">
+                            {% if request.user.groups.first.name == "Administrador" %}
+                            <li><a class="dropdown-item fw-bolder letras-texto" style="border-radius: 12px;" href="{% url 'stock' %}">Stock</a></li>
+                            {% endif %}
+                          </ul>
+                        </li>
+                        {% endif %}
+                        <li class="nav-item dropdown my-2">
+                          <a class="nav-link dropdown-toggle letras-texto" href="#" role="button"  aria-expanded="false" style="color: black;">
+                            Productos
+                          </a>
+                          <ul class="dropdown-menu position-absolute b-0 color-fondo-texto" style="background-color: #fcf9f5; border-radius:15%;">
+                            <li><a class="dropdown-item fw-bolder letras-texto" style="border-radius: 12px;"href="{% url 'producto' %}">Producto</a></li>
+                          </ul>
+                        </li>
+                        {% if request.user.groups.first.name == "Administrador" %} 
+                        <li class="nav-item dropdown my-2">
+                          <a class="nav-link dropdown-toggle letras-texto" href="#" role="button"  aria-expanded="false" style="color: black;">
+                            Usuarios
+                          </a>
+                          <ul class="dropdown-menu position-absolute b-0 color-fondo-texto" style="background-color: #fcf9f5; border-radius:15%;">
+                            <li><a class="dropdown-item fw-bolder letras-texto" style="border-radius: 12px;"href="{% url 'usuario' %}">Usuarios</a></li>
+                            <li><a class="dropdown-item fw-bolder letras-texto" style="border-radius: 12px;"href="{% url 'sucursal' %}">Sucursal</a></li>
+                          </ul>
+                        </li>
+                        {% endif %} 
+                        {% if request.user.groups.first.name == "Administrador" or request.user.groups.first.name == "Empleado" %}
+                        <li class="nav-item dropdown my-2">
+                          <a class="nav-link dropdown-toggle letras-texto" href="#" role="button"  aria-expanded="false" style="color: black;">
+                            Ventas
+                          </a>
+                          <ul class="dropdown-menu position-absolute b-0 color-fondo-texto" style="background-color: #fcf9f5; border-radius:15%;">
+                            <li><a class="dropdown-item fw-bolder letras-texto" style="border-radius: 12px;"href="{% url 'venta' %}">Venta</a></li>
+                            <li><a class="dropdown-item fw-bolder letras-texto" style="border-radius: 12px;"href="{% url 'metododepago' %}">Método de pago</a></li>
+                            <li><a class="dropdown-item fw-bolder letras-texto" style="border-radius: 12px;"href="{% url 'domicilio' %}">Domicilio</a></li>
+                          </ul>
+                        </li>
+                        {% endif %}
+                        {% if request.user.groups.first.name == "Administrador" or request.user.groups.first.name == "Empleado" %}
+                        <li class="nav-item dropdown my-2">
+                          <a class="nav-link dropdown-toggle letras-texto" href="#" role="button"  aria-expanded="false" style="color: black;">
+                            Backups
+                          </a>
+                          <ul class="dropdown-menu position-absolute b-0 color-fondo-texto" style="background-color: #fcf9f5; border-radius:15%;">
+                            <li><a class="dropdown-item fw-bolder letras-texto" style="border-radius: 12px;"href="{% url 'list_backups' %}">Backups</a></li>
+                          </ul>
+                        </li>
+                        {% endif %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+              <div class="d-flex justify-content-center align-items-center">
+                {% if user.is_authenticated %}
+                <p>Bienvenido, {{ user.first_name }}.</p>
+                {% endif %}
+            </div>
+            
+            
+        </div>
+        <section class="content">
+            <div class="container-fluid" style="margin: 0; padding: 0;">
+        {% block contenido %}
+
+        {% endblock contenido %}
+            </div>
+        </section>
+
+        <section>
+          <section>
+              <button id="backup-button" class="animated-button">Generar Copia de Seguridad</button>
+          </section>
+          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+          <script>
+              $(document).ready(function () {
+                  $("#backup-button").click(function () {
+                      $.get("{% url 'backup_database' %}", function (data) {
+                          alert(data);
+                      });
+                  });
+              });
+          </script>
+        </section>
+
+
+
+    {% include 'partials/modal.html' %}
+
+    {% include 'partials/footer.html' %}
+</div>
+
+
+
+
+    {% if messages %}
+    {% for message in messages %}
+        <script>
+            Swal.fire(
+                {position: 'top-end',
+            toast: true,
+            showConfirmButton: false,
+            timer:10000,
+            timerProgressBar: true,
+            background: '#ffffff',
+            icon:'{{ message.tags }}',
+            text:'{{ message }}',
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }        });
+        </script>
+    {% endfor %}
+{% endif %}
+
+</body>
+</html>

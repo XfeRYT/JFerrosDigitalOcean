@@ -1,0 +1,46 @@
+{
+  "name": "proyecto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavidBece/PROYECTO.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DavidBece/PROYECTO/issues"
+  },
+  "homepage": "https://github.com/DavidBece/PROYECTO#readme",
+  "dependencies": {
+    "accessibility": "^4.5.7",
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.2.3",
+    "bootstrap-icons": "^1.10.5",
+    "datatables.net": "^1.13.4",
+    "datatables.net-bs4": "^1.13.4",
+    "datatables.net-bs5": "^1.13.4",
+    "datatables.net-buttons-bs4": "^2.3.6",
+    "datatables.net-responsive": "^2.4.1",
+    "datatables.net-responsive-bs": "^2.4.1",
+    "datatables.net-responsive-bs4": "^2.4.1",
+    "datatables.net-responsive-bs5": "^2.4.1",
+    "font-awesome": "^4.7.0",
+    "fontawesome-free": "^1.0.4",
+    "jquery": "^3.7.0",
+    "jszip": "^3.10.1",
+    "npm-watch": "^0.11.0",
+    "overlayscrollbars": "^2.2.0",
+    "pdfmake": "^0.2.7",
+    "sass": "^1.63.6",
+    "sass-lint": "^1.13.1",
+    "sweetalert2": "^11.4.8",
+    "toastr": "^2.1.4",
+    "uglify-js": "^3.17.4",
+    "uglifyjs-folder": "^3.3.0"
+  }
+}

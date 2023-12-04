@@ -1,0 +1,83 @@
+{% extends 'partials/body.html' %} {% load static %} {% block contenido %}
+{% if request.user.groups.first.name == "Administrador" or request.user.groups.first.name == "Empleado" %}
+<ol class="breadcrumb px-3 float-sm-right d-flex justify-content-end">
+  <li class="breadcrumb-item fw-bolder letras-texto"><a href="{% url 'index' %}" style="text-decoration: none; color: #68411d;">Inicio</a></li>
+  <li class="breadcrumb-item active fw-bolder letras-texto" style="color: #7e6c5c;">{{titulo}}</li>
+</ol>
+<div class="wrapper">
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row px-1 px-sm-3" style="min-width: 270px;">
+        <div class="col px-1 px-sm-3">
+          <div class="px-1 px-sm-3">
+            <div class="fs-1 fw-bold">
+              <h3 class="py-5">{{titulo}}</h3>
+            </div>
+            <div class="table-responsive p-3" style=" background-color: #fcf9f5; border-color: #68411d; border-width: 3px; border-style: solid;">
+              <table id="example1" class="table table-striped table-hover py-5">
+                <thead style="background-color: #fcf9f5">
+                  <tr style="background-color: #d4c6b5;text-align: center;">
+                    <th style="text-align: center;">Fecha</th>
+                    <th style="text-align: center;">Empleado</th>
+                    <th style="text-align: center;">Método de pago</th>
+                    <th style="text-align: center;">Domicilio</th>
+                    {% if request.user.groups.first.name == "Administrador" %}
+                    <th style="text-align: center;" class= "notexport">Acciones</th>
+                    {% endif %}
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for venta in ventas %}
+                  <tr style="background-color: #f3eee9">
+                    <td style="color: #68411d;text-align: center;">{{venta.fecha}}</td>
+                    <td style="color: #68411d;text-align: center;">{{venta.usuario}}</td>
+                    <td style="color: #68411d;text-align: center;">{{venta.metododepago.nombre}}</td>
+                    <td style="color: #68411d;text-align: center;">{{venta.domicilio}}</td>
+                    {% if request.user.groups.first.name == "Administrador" %}
+                    <td style="text-align: center;">
+                      {% if venta.estado != "0" %}
+                      <button  type="button" data-ident="{{venta.id}}" class="btnEliminar btn animatede-button" data-bs-toggle="modal" data-bs-target="#modalConf">Eliminar</button>
+                      {% endif %}
+                    {% if venta.estado == "1" %}
+                    <a class="btn animatedm-button btn-primary" href="{% url 'detalle_venta' venta.id %}">Modificar</a>
+                    {% else %}
+                    <a class="btn animatedm-button btn-primary" href="{% url 'venta_final' venta.id %}">Ver</a>
+                    </td>
+                    {% endif %}
+                  </tr>
+                  {% endif %} {% endfor %}
+                </tbody>
+              </table>
+              {% if request.user.groups.first.name == "Administrador" or request.user.groups.first.name == "Empleado" %}
+              <a href="{% url 'venta-crear' %}">
+                <button class="animatedd-button" type="button">
+                  Crear {{titulo}}
+                </button>
+              </a>
+              <a href="{% url 'domicilio-crear' %}">
+                <button class="animatedd-button" type="button">
+                  Crear domicilio
+                </button>
+              </a>
+              <a href="{% url 'metododepago-crear' %}">
+                <button class="animatedd-button" type="button">
+                  Crear metodo de pago
+                </button>
+              </a>
+              {% endif %}
+            </div>
+<!-- /.card-body -->
+          </div>
+<!-- /.card -->
+        </div>
+<!-- /.col -->
+      </div>
+<!-- /.row -->
+    </div>
+<!-- /.container-fluid -->
+  </section>
+<!-- /.content -->
+</div>
+{% endif %}
+{% endblock contenido %}

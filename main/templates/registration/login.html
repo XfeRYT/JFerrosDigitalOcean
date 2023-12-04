@@ -1,0 +1,132 @@
+{% extends 'partials/body-login.html' %}
+{% load static %}
+{% load i18n %}
+{% block contenido %}
+
+
+
+<div class="overflow-hidden">
+    <div class="my-5 py-3 mx-5 justify-content-center align-items-center">
+        <div class="d-block px-5 my-5 justify-content-center ">
+            <div class=" w-100 justify-content-center d-flex">
+                <img src="{% static 'img/logo.png' %}" alt="AdminLTE Logo" class="brand-image img-circle w-100 " style="opacity: .8; max-width: 400px; min-width: 200px;">
+            </div>
+        </div>
+        <div class="row p-lg-5 d-flex justify-content-center">
+            <div class="col-md-5 mx-md-2 mx-lg-3 col-lg-5  col-sm-12 my-sm-3  align-items-center p-3 justify-content-center d-flex position-relative" style="border: 6px solid white; min-width: 250px; min-height: 400px;">
+                <div class="w-75 p-3 d-block">
+                    <h2 class="mb-4 fw-bold d-block"style="color: #68411d;">Iniciar Sesión</h2>
+                    <form class="" method="post">
+                        {% csrf_token %}
+                        <div class="input-group mb-3">
+                            <input type="text" name="{{ form.username.name }}" class="form-control" placeholder="Usuario">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <i class="bi bi-person-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="password" name="{{ form.password.name }}" class="form-control" placeholder="Contraseña">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <i class="bi bi-lock-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="d-flex">
+                                <div class="icheck-primary">
+                                    <input type="checkbox" name="{{ form.RememberMeCheckbox.name }}" id="remember">
+                                    <label for="remember" style="color: #68411d;">
+                                        Recuérdame
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-8 my-3 justify-content-end d-flex w-100">
+                                <button type="submit" class="animated-button">Iniciar Sesión</button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </form>
+                    {% if form.non_field_errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ form.non_field_errors }}
+                    </div>
+                    {% endif %}
+        
+                    {% if form.username.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ form.username.errors }}
+                    </div>
+                    {% endif %}
+        
+                    {% if form.password.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ form.password.errors }}
+                    </div>
+                    {% endif %}
+        
+                    <p class="mb-1 ">
+                        <a href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a>
+                    </p>
+                </div>
+            </div>
+            <div class="my-sm-3 mx-lg-3 mx-md-2 col-md-5 col-lg-5  col-sm-12 align-items-center p-3 justify-content-center d-flex" style="border: 6px solid white; min-width: 250px; min-height: 400px;">
+                <div class="w-75">
+                    <h2 class="fw-bold mb-4 d-block" style="color: #68411d;">¿Aún no tienes cuenta?</h2>
+                    <p class="mb-4 lh-base fs-5 w-100 fw-medium" style="color: #68411d;">Ingresa y conoce los grandes beneficios de pertenecer a nuestra familia</p>
+                    <div class="w-100 mt-5 lh-base justify-content-center d-flex">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .animated-button {
+          display: inline-block;
+          padding: 10px 20px;
+          font-size: 16px;
+          background-color: #68411d;
+          cursor: pointer;
+          color: #fff;
+          font-weight: 600;
+          border-radius: 10px 10px;
+          border: 2px solid #68411d;
+          position: relative;
+          overflow: hidden;
+          z-index: 1;
+
+        }
+
+        .animated-button:before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: #fcf9f5;
+          transform: scaleX(0);
+          transform-origin: left center;
+          transition: transform 0.6s ease;
+          z-index: -1;
+        }
+        .animated-button:hover{
+          color: #68411d;
+          transform-origin: left right;
+          transition-duration: 0.5s;
+        }
+        .animated-button:hover:before {
+          transform: scaleX(1);
+          transition-duration: 0.5s;
+          transform-origin: right left;
+
+        }
+  </style>
+
+</div>
+
+{% endblock contenido %}

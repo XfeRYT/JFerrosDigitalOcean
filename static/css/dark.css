@@ -1,0 +1,16 @@
+#modo{
+    width: 30px;
+    font-size: 70px;
+    margin: auto;
+    cursor: pointer;
+}
+#botonInvertir {
+    position: fixed ;
+    top: 50% !important;
+    right: 20px;
+    transform: translate(50%, -50%);
+    z-index: 100;
+}
+.invertido{
+    filter: invert(100%);
+}

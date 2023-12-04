@@ -1,0 +1,101 @@
+{% extends 'partials/body.html' %} {% load static %} {% block contenido %}
+  {% if request.user.groups.first.name == 'Administrador' or request.user.groups.first.name == 'Proveedor' %}
+  <ol class="breadcrumb px-3 float-sm-right d-flex justify-content-end">
+    <li class="breadcrumb-item fw-bolder letras-texto"><a href="{% url 'index' %}" style="text-decoration: none; color: #68411d;">Inicio</a></li>
+    <li class="breadcrumb-item active fw-bolder letras-texto" style="color: #7e6c5c;"><a href="{% url 'compra' %}" style="text-decoration: none; color: #68411d;">Compra</a></li>
+    <li class="breadcrumb-item active fw-bolder letras-texto" style="color: #7e6c5c;">Crear</li>
+  </ol>
+    <div class="wrapper">
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row px-1 px-sm-3" style="min-width: 270px;">
+            <div class="col px-1 px-sm-3">
+              <div class="px-1 px-sm-3">
+                <div class="fs-1 fw-bold">
+                  <h3 class="py-5">{{ titulo }}</h3>
+                </div>
+                <div class="d-flex">
+                  <div class="p-5 mx-3 " style=" background-color: #fcf9f5; border-colo r: #68411d; border-width: 3px; border-style: solid;">
+                    <b>Codigo de Compra</b> <br>
+                    <p>{{compra.id}}</p>
+                    <b>Fecha</b> <br>
+                    <p>{{compra.fecha}}</p>
+                    <b>Empleado</b><br>
+                    <p>{{compra.usuario}}</p>
+                  </div>
+                  <div class="table-responsive p-3" style=" background-color: #fcf9f5; border-color: #68411d; border-width: 3px; border-style: solid; width: 80%;">
+                    <table id="example1" class="table table-bordered table-striped py-5 mi-clase-especial hola">
+                      <thead style="background-color: #fcf9f5;">
+                        <tr style="background-color: #d4c6b5;text-align: center;">
+                          <th>Producto</th>
+                          <th>Cantidad</th>
+                          <th>Precio de Compra</th>
+                          <th>Subtotal</th>
+
+                          {% if request.user.groups.first.name == 'Administrador' %}
+                            <th class= "notexport">Acciones</th>
+                          {% endif %}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for detalle_compra in detalle_compras %}
+                          {% if detalle_compra.estado != '0' %}
+                            <tr style="background-color: #f3eee9">
+                              <td style="color: #68411d;text-align: center;">{{ detalle_compra.producto.nombre }}</td>
+                              <td style="color: #68411d;text-align: center;">{{ detalle_compra.cantidad }}</td>
+                              <td style="color: #68411d;text-align: center;">{{ detalle_compra.precio_colombiano }}</td>
+                              <td style="color: #68411d;text-align: center;">{{ detalle_compra.subtotal_colombiano }}</td>
+                              {% if request.user.groups.first.name == 'Administrador' %}
+                                <td style="text-align: center;">
+                                  <button type="button" data-ident="{{ detalle_compra.id }}" class="btnEliminar animatede-button" data-bs-toggle="modal" data-bs-target="#modalConf">Eliminar</button>
+                                  <a class="btn animatedm-button btn-primary" href="{% url 'detalle_compra-modificar' detalle_compra.id %}">Modificar</a>
+                                </td>
+                              {% endif %}
+                            </tr>
+                          {% endif %}
+                        {% endfor %}
+                        <tr style="background-color: #f3eee9" class="eliminar-fila">
+                          <form method="POST">
+                            <td style="color: #68411d;text-align: center;"> 
+                              {% csrf_token %}
+                                <select name="producto" class="select form-select" required="" id="id_producto" title="id">
+                                  {% for producto in productos %}
+                                  <option value="{{producto.id}}">{{producto.nombre}}</option>
+                                  {% endfor %}
+                                </select>
+                            </td>
+                            <td style="color: #68411d;text-align: center;">
+                              <input type="number" name="cantidad" class="numberinput form-control" required="" id="id_cantidad" placeholder="Cantidad">
+                            </td>
+                            <td style="color: #68411d;text-align: center;">
+                              <input type="number" name="precio_compra"  class="numberinput form-control" required="" id="id_precio_compra" placeholder="Precio compra">
+                            </td>
+                            <td style="text-align: center;">
+                            </td>
+                            <td style="text-align: center;"><button type="submit" class="btn btn-success">Añadir</button>
+                            </td>
+                          </form>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <a class="btn animatedm-button btn-primary" href="{% url 'detalle_compra-finalizar' compra.id %}"
+                    >Finalizar venta</a>
+                      <a class="btn animatedm-button btn-primary" href="{% url 'compra' %}"
+                      >Volver</a>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+    </div>
+  {% endif %}
+
+{% endblock %}

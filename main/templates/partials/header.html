@@ -1,0 +1,150 @@
+{% load static %}
+
+<header class="text-white p-0 m-0 d-block w-auto" style=" min-width: 280px;">
+    <div class="m-0 p-0 fs-6 d-block container-fluid w-auto" style="background-color: #d4c6b5;">
+      <div class="header-contenedor px-sm-3 px-md-3 px-lg-4 px-xl-4 px-xxl-4  align-items-center justify-content-center h-100 w-100" id="myContainer" style="max-height: 250px; min-height: 100px;">
+        <div class="header-contenedor-logo mb-1 m-sm-0 justify-content-center d-flex position-relative">
+          <a href="{% url 'index' %}"><img src="/static/img/logo.png" alt="" class="header-logo w-100  mt-2 mt-sm-0" style="max-width: 250px;"></a>
+        </div>
+        <div class="d-flex w-100 justify-content-center align-content-start">
+          <p class="d-flex mx-3 mt-4 m-sm-0 p-0 position-relative w-auto align-items-center justify-content-center">
+            <button class="btn align-items-center d-flex border-0 m-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+              <img class=" header-buscar m-md-2 m-lg-3 m-xl-4 m-xxl-4 " src="/static/css/icons/search.svg" alt="Búscar">
+            </button>
+          </p>
+          <div class="d-flex position-relative w-auto align-items-center">
+            <div class="collapse collapse-horizontal" id="collapseWidthExample">
+              <div class="header-cont-buscar card-body w-100">
+                <form id="search-form"class=" me-3 mx-sm-0  mb-lg-0 me-lg-3">
+                  <input type="search" class="form-control form-control-dark"  placeholder="Buscar..." aria-label="Search"/>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="header-cont-iconos d-flex position-relative w-auto align-items-center justify-content-end " >
+          <div class="d-flex justify-content-center w-100 m-3 m-sm-0">
+            <div class="d-flex mb-3 mb-sm-0 justify-content-center col ms-sm-1 ms-md-1 ms-lg-2 ms-xl-2 ms-xxl-2"><a class="ms-sm-1 ms-md-1 ms-lg-2 text-decoration-none d-flex align-items-center" target="_blank" href="/static/MANUAL DEL ADMINISTRADOR.pdf"><span class="fs-6" style="color: #68411d;">Ayuda</span><img class="m-1 m-sm-1 m-md-1 mx-lg-2 mx-xl-2 mx-xxl-3 header-iconos" src="/static/css/icons/person-fill-exclamation.svg" alt="Ayuda" ></a></div>
+            <div class="d-flex mb-3 mb-sm-0 justify-content-center col ms-sm-1 ms-md-1 ms-lg-2 ms-xl-2 ms-xxl-2"><a class="ms-sm-1 ms-md-1 ms-lg-2 text-decoration-none d-flex align-items-center" href="http://"><span class="fs-6" style="color: #68411d;" >Carro</span><img class="m-1 m-sm-1 m-md-1 mx-lg-2 mx-xl-2 mx-xxl-3 header-iconos" src="/static/css/icons/cart3.svg" alt="Carro" ></a></div>
+            <div class="d-flex mb-3 mb-sm-0 justify-content-center col ms-sm-1 ms-md-1 ms-lg-2 ms-xl-2 ms-xxl-2"><a class="ms-sm-1 ms-md-1 ms-lg-2 text-decoration-none d-flex align-items-center" href="{% url 'logout' %}"><span class="fs-6" style="color: #68411d;">Salir</span><img class="m-1 m-sm-1 m-md-1 mx-lg-2 mx-xl-2 mx-xxl-3 header-iconos" src="/static/css/icons/box-arrow-right.svg" alt="Salir" ></a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function toggleClass() {
+        const container = document.getElementById('myContainer');
+        if (window.innerWidth < 576) {
+          container.classList.remove('d-flex');
+          container.classList.add('d-block');
+        } else {
+          container.classList.remove('d-block');
+          container.classList.add('d-flex');
+        }
+      }
+  
+      // Agregar el listener al evento resize de la ventana
+      window.addEventListener('resize', toggleClass);
+  
+      // Ejecutar la función inicialmente para establecer la clase correcta al cargar la página
+      toggleClass();
+    </script>
+
+
+  <div class="container-fluid p-0 m-0 w-100" style="background-color: #fcf9f5; ">
+    <style>.direc{border: 1px solid transparent; background-color: transparent; min-height: 50px; font-weight: 600;}.direc:hover{border-color: #68411d; border-width: 1px; border-style: double; border-radius: 12px;}</style>
+    <div class="row fs-6 header-cont-menu px-0 px-sm-3 px-md-3 px-lg-4 px-xl-4 px-xxl-5 mx-xl-5 mx-xxl-5 d-flex justify-content-around w-auto " style="min-height: 70px;">
+      
+
+
+      <div class="col-sm-4 col-md-2 dropdown d-flex align-items-center justify-content-center">
+        <button class="direc p-sm-1 p-md-1 text-center" style="color: #68411d;" type="button"  aria-expanded="false">
+          Herramientas de corte
+        </button>
+        <ul class="header-cont-seccion dropdown-menu menuu2 fs-6" style="background-color: #fcf9f5;">
+          <li><a class="dropdown-item" style="color: #68411d; font-weight: 600;" href="#">Sierra de Mano</a></li>
+          <li><a class="dropdown-item" style="color: #68411d;font-weight: 600;"  href="#">Lima</a></li>
+          <li><a class="dropdown-item" style="color: #68411d;font-weight: 600;"  href="#">Broca</a></li>
+          <li><a class="dropdown-item"style="color: #68411d;font-weight: 600;"  href="#">Macho de Rosca</a></li>
+          <li><a class="dropdown-item"  style="color: #68411d;font-weight: 600;"  href="#">Escariador</a></li>
+          <li><a class="dropdown-item" style="color: #68411d;font-weight: 600;"  href="#">Terraja de Roscar</a></li>
+          <li><a class="dropdown-item"style="color: #68411d;font-weight: 600;"   href="#">Tijeras</a></li>
+          <li><a class="dropdown-item"style="color: #68411d;font-weight: 600;"   href="#">Cortafrío</a></li>
+          <li><a class="dropdown-item" style="color: #68411d;font-weight: 600;"  href="#">Buril</a></li>
+          <li><a class="dropdown-item" style="color: #68411d;font-weight: 600;"  href="#">Cincel</a></li>
+          <li><a class="dropdown-item" style="color: #68411d;font-weight: 600;"  href="#">Cizalla</a></li>
+          <li><a class="dropdown-item"style="color: #68411d;font-weight: 600;"   href="#">Tenaza</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-4 col-md-2 dropdown d-flex align-items-center justify-content-center" >
+        <button class="p-sm-1 direc text-center " style="color: #68411d;" type="button"  aria-expanded="false">
+          Herramientas de golpe
+        </button>
+        <ul class="header-cont-seccion dropdown-menu fs-6" style="background-color: #fcf9f5;">
+          <li><a class="dropdown-item" href="#" style="color: #68411d; font-weight: 600;">Taladros</a></li>
+          <li><a class="dropdown-item" href="#" style="color: #68411d; font-weight: 600;">Cinceles</a></li>
+          <li><a class="dropdown-item" href="#" style="color: #68411d; font-weight: 600;">Punzones</a></li>
+          <li><a class="dropdown-item" href="#" style="color: #68411d; font-weight: 600;">Pasadores</a></li>
+          <li><a class="dropdown-item" href="#" style="color: #68411d; font-weight: 600;">Cuñas</a></li>
+
+        </ul>
+      </div>
+      <div class="col-sm-4 col-md-2 dropdown d-flex align-items-center justify-content-center" >
+        <button class="direc p-sm-1 text-center  " style="color: #68411d;" type="button"  aria-expanded="false">
+          Herramientas de trazo
+        </button>
+        <ul class=" header-cont-seccion dropdown-menu fs-6" style="background-color: #fcf9f5;">
+          <li><a class="dropdown-item " href="#"  style="color: #68411d; font-weight: 600;">Punta de Trazar</a></li>
+          <li><a class="dropdown-item" href="#"  style="color: #68411d; font-weight: 600;">Gramil</a></li>
+          <li><a class="dropdown-item" href="#"  style="color: #68411d; font-weight: 600;" >Granete</a></li>
+          <li><a class="dropdown-item" href="#"  style="color: #68411d; font-weight: 600;">Guias</a></li>
+          <li><a class="dropdown-item" href="#" style="color: #68411d; font-weight: 600;" >Compas</a></li>
+          <li><a class="dropdown-item" href="#" style="color: #68411d; font-weight: 600;">Marmoles de Trazar</a></li>
+          <li><a class="dropdown-item" href="#" style="color: #68411d; font-weight: 600;">Cubos de Trazado</a></li>
+          <li><a class="dropdown-item" href="#" style="color: #68411d; font-weight: 600;">Calzos</a></li>
+          <li><a class="dropdown-item" href="#" style="color: #68411d; font-weight: 600;">Escuadras Orientables</a></li>
+          <li><a class="dropdown-item" href="#" style="color: #68411d; font-weight: 600;">Barnices de Trazador </a></li>
+
+
+        </ul>
+      </div>
+      <div class="col-sm-4  col-md-2 dropdown d-flex align-items-center justify-content-center" >
+        <button class="direc p-sm-1 text-center " style="color: #68411d; " type="button"  aria-expanded="false">
+          Herramienta de montaje
+        </button>
+        <ul class="header-cont-seccion dropdown-menu fs-6" style="background-color: #fcf9f5;">
+          <li><a class="dropdown-item " href="#"  style="color: #68411d; font-weight: 600;">Llaves</a></li>
+          <li><a class="dropdown-item" href="#"  style="color: #68411d; font-weight: 600;">Destornilladores</a></li>
+          <li><a class="dropdown-item" href="#"  style="color: #68411d; font-weight: 600;">Tenazas</a></li>
+          <li><a class="dropdown-item" href="#"  style="color: #68411d; font-weight: 600;">Alicates</a></li>
+          <li><a class="dropdown-item" href="#"  style="color: #68411d; font-weight: 600;">Limas Profesionales</a></li>
+
+        </ul>
+      </div>
+      <div class="col-sm-4 col-md-2 dropdown d-flex  align-items-center justify-content-center" >
+        <button class="direc p-sm-1 text-center " style="color: #68411d;" type="button"  aria-expanded="false">
+          Herramientas de sujeción
+        </button>
+        <ul class="header-cont-seccion fs-6 dropdown-menu " style="background-color: #fcf9f5;">
+          <li><a class="dropdown-item " href="#" style="color: #68411d; font-weight: 600;">Pinza</a></li>
+          <li><a class="dropdown-item" href="#" style="color: #68411d; font-weight: 600;">Tornillo de Banco</a></li>
+          <li><a class="dropdown-item" href="#" style="color: #68411d; font-weight: 600;">Sargento</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-4 col-md-2 dropdown d-flex align-items-center justify-content-center" >
+        <button class="p-sm-1 direc text-center " style="color: #68411d;" type="button"  aria-expanded="false">
+          Herramientas Mecánicas
+        </button>
+        <ul class="header-cont-seccion fs-6 dropdown-menu menuu" style="background-color: #fcf9f5;">
+          <li><a class="dropdown-item" href="#"  style="color: #68411d; font-weight: 600;">Taladro</a></li>
+          <li><a class="dropdown-item" href="#"  style="color: #68411d; font-weight: 600;">Torno</a></li>
+          <li><a class="dropdown-item" href="#"  style="color: #68411d; font-weight: 600;">Sierra Eléctrica</a></li>
+          <li><a class="dropdown-item" href="#"  style="color: #68411d; font-weight: 600;">Esmeril</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+
+  </div>
+</header>

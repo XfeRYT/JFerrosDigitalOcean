@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'main.wsgi.application'
 DATABASES = {
      'default': {
          'ENGINE': 'django.db.backends.mysql',
-         'NAME': 'JFerros',
+         'NAME': 'jferros',
          'USER': 'root',
          'PASSWORD':'kingkong2950',
          'HOST': '127.0.0.1',

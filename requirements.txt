@@ -6,3 +6,4 @@ django-bootstrap-icons
 django-safedelete
 django-formtools==2.4
 django-dbbackup>=3.0.0
+mysqlclient==2.1.0

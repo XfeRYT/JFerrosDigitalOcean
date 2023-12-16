@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     'django_bootstrap_icons',
     'formtools',
     'dbbackup',
-    'backup',
     'backup.apps.BackupConfig',
 ]
 CRISPY_ALLOWED_TEMPLATE_PACKS= "bootstrap5"

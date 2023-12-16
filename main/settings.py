@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'main.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 DEVELOPMENT_MODE = os.getenv("DEVELOPMENT MODE", "False") == "True" 
-if DEVELOPMENT MODE is True: 
+if DEVELOPMENT_MODE is True: 
     DATABASES = { 
         'default': {
             'ENGINE': 'django.db.backends.mysql',

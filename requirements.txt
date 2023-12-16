@@ -5,3 +5,4 @@ crispy-bootstrap5
 django-bootstrap-icons
 django-safedelete
 django-formtools==2.4
+django-dbbackup==3.13.0

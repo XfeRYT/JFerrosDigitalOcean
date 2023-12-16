@@ -26,12 +26,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-jrev=ncdw)z#5$ne1x&iylpqr6(-6o-)g-fvh0$7%a-k!em7c5'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOST', '127.0.0.1, localhost').split(',')
 
 
 # Application definition
@@ -93,24 +93,24 @@ WSGI_APPLICATION = 'main.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-DATABASES = {
-     'default': {
-         'ENGINE': 'django.db.backends.mysql',
-         'NAME': 'jferros',
-         'USER': 'root',
-         'PASSWORD':'kingkong2950',
-         'HOST': '127.0.0.1',
-         'PORT': '3306',
-     },
-    #'default': {
-        #"ENGINE": "django.db.backends.mysql",
-        #"OPTIONS": {
-        #    "read_default_file": 'my.cnf',
-        #    "init_command": "SET default_storage_engine=INNODB",
-       # },
-    #}
-}
+DEVELOPMENT_MODE = os.getenv("DEVELOPMENT MODE", "False") == "True" 
+if DEVELOPMENT MODE is True: 
+    DATABASES = { 
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'jferros',
+            'USER': 'root',
+            'PASSWORD':'kingkong2950',
+            'HOST': '127.0.0.1',
+            'PORT': '3306',
+        }, 
+    }
+elif len(sys.argv) and sys.argv[1] != 'collectstatic': 
+    if os.getenv("DATABASE_URL", None) is None: 
+        raise Exception("DATABASE_URL environment variable not defined") 
+    DATABASES = {
+        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
+    } 
 
 # settings.py
 BACKUP_ROOT = os.path.join(BASE_DIR, 'backups')

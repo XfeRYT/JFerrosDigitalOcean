@@ -14,14 +14,7 @@ import os
 from subprocess import call
 
 if 'DIGITALOCEAN' in os.environ:
-    os.environ['DISABLE_COLLECTSTATIC'] = '1'
-    call(["gunicorn", "--worker-tmp-dir", "/dev/shm", "main.wsgi"])
-else:
-    # Configuración normal sin deshabilitar la recopilación estática
-    from django.core.wsgi import get_wsgi_application
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'main.settings')
-    application = get_wsgi_application()
-
+    DISABLE_COLLECTSTATIC = '1'
 
 from pathlib import Path
 
